@@ -2,3 +2,7 @@ body {
     background-color: lightseagreen;
     color: white;
 }
+
+.redBack {
+    background-color: red;
+}
