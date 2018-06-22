@@ -12,6 +12,7 @@ class Employee {
     }
 }
 
+// set global variable for total expenses
 let totalExpense = 0;
 
 // function for constructing new employees and adding them to employees array
@@ -26,6 +27,7 @@ $(readyNow);
 
 function readyNow() {
     addEventListener();
+    updateExpense(totalExpense);
 }
 
 function addEventListener() {
@@ -45,10 +47,18 @@ function handleSubmit() {
     
     // append new table row with input data
     employeesToTable();
+
+    // update total expense based on additonal salary
+    updateExpense(salary);
     
 }
 
 function employeesToTable() {
+
+    // clear current table data
+    $('#salaryTable').empty();
+    
+    // add table data built from employees array
     for (employee of employees) {
         addTableRow(employee.firstName, employee.lastName, employee.idNum, employee.title, employee.salary);
     }
@@ -68,6 +78,11 @@ function addTableRow(firstName, lastName, idNum, title, salary) {
 }
 
 function updateExpense(salary) {
-    totalExpense += (parseInt(salary)/12);
-    return totalExpense;
+
+    // calculate monthly expense for passed in salary and add to total expense
+    totalExpense += salary/12;
+    //return totalExpense;
+
+    // append updated expenses to the DOM
+    $('#monthlyTotal').text('Total Monthly: ' + totalExpense);
 }
