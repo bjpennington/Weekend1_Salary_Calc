@@ -35,5 +35,19 @@ function handleSubmit() {
     let salary = $('#salaryInput').val();
     
     newEmployee(firstName, lastName, idNum, title, salary);
+    addTableRow(firstName, lastName, idNum, title, salary);
     
+}
+
+function addTableRow(firstName, lastName, idNum, title, salary) {
+    // use passed in parameters to create a table row
+    let $row = $('<tr></tr>');
+    
+    $row.append(`<td>${firstName}</td>`);
+    $row.append(`<td>${lastName}</td>`);
+    $row.append(`<td>${idNum}</td>`);
+    $row.append(`<td>${title}</td>`);
+    $row.append(`<td>${salary}</td>`);
+
+    $('#salaryTable').append($row);
 }
