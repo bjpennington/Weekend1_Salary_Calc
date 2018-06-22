@@ -1,7 +1,14 @@
-console.log('js');
 $(readyNow);
 
 function readyNow() {
-    console.log('jq');
+    addEventListener();
+}
+
+function addEventListener() {
+    $('#submitBtn').on('click', handleSubmit);
+}
+
+function handleSubmit() {
+    console.log('You clicked it!');
     
 }
