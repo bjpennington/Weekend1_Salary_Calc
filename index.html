@@ -5,24 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Salary Calculator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css" />
     <script src="scripts/jquery-3.3.1.min.js"></script>
     <script src="scripts/client.js"></script>
 </head>
-<body>
+<body class="container">
     <header>
         <h1>Salary Calculator</h1>
     </header>
     <main>
-        <div id="employeeForm">
+        <div id="employeeForm" class="form-group">
             <input id="fnInput" type="text" placeholder="First Name">
             <input id="lnInput" type="text" placeholder="Last Name">
             <input id="idNumInput" type="number" placeholder="Employee ID Number">
             <input id="titleInput" type="text" placeholder="Job Title">
             <input id="salaryInput" type="number" placeholder="Annual Salary">
-            <button id="submitBtn">Submit</button>
+            <button id="submitBtn" class="button">Submit</button>
         </div>
-        <div id="salaryTable">
+        <div id="salaryTable" class="table">
             <table>
                 <thead>
                     <tr>
@@ -40,7 +41,7 @@
         </div>
     </main>
     <footer>
-        <p>Cash cash money.</p>
+        <!-- <p>Cash cash money.</p> -->
     </footer>   
 </body>
 </html>

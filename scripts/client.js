@@ -1,5 +1,7 @@
+// create empty array for employees
 const employees = [];
 
+// create Employee class
 class Employee {
     constructor(firstName, lastName, idNum, title, salary) {
         this.firstName = firstName;
@@ -10,6 +12,7 @@ class Employee {
     }
 }
 
+// function for constructing new employees and adding them to employees array
 function newEmployee(firstName, lastName, idNum, title, salary) {
     let employee = new Employee(firstName, lastName, idNum, title, salary);
     employees.push(employee);
@@ -28,13 +31,17 @@ function addEventListener() {
 }
 
 function handleSubmit() {
+    // capture input values
     let firstName = $('#fnInput').val();
     let lastName = $('#lnInput').val();
     let idNum = $('#idNumInput').val();
     let title = $('#titleInput').val();
     let salary = $('#salaryInput').val();
     
+    // use input values to create new objects in the array
     newEmployee(firstName, lastName, idNum, title, salary);
+    
+    // append new table row with input data
     addTableRow(firstName, lastName, idNum, title, salary);
     
 }
