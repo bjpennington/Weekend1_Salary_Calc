@@ -13,6 +13,7 @@ class Employee {
 function newEmployee(firstName, lastName, idNum, title, salary) {
     let employee = new Employee(firstName, lastName, idNum, title, salary);
     employees.push(employee);
+    return employee;
 }
 
 
@@ -27,6 +28,12 @@ function addEventListener() {
 }
 
 function handleSubmit() {
-    console.log('You clicked it!');
+    let firstName = $('#fnInput').val();
+    let lastName = $('#lnInput').val();
+    let idNum = $('#idNumInput').val();
+    let title = $('#titleInput').val();
+    let salary = $('#salaryInput').val();
+    
+    newEmployee(firstName, lastName, idNum, title, salary);
     
 }
