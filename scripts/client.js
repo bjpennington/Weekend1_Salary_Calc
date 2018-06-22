@@ -12,6 +12,8 @@ class Employee {
     }
 }
 
+let totalExpense = 0;
+
 // function for constructing new employees and adding them to employees array
 function newEmployee(firstName, lastName, idNum, title, salary) {
     let employee = new Employee(firstName, lastName, idNum, title, salary);
@@ -42,8 +44,14 @@ function handleSubmit() {
     newEmployee(firstName, lastName, idNum, title, salary);
     
     // append new table row with input data
-    addTableRow(firstName, lastName, idNum, title, salary);
+    employeesToTable();
     
+}
+
+function employeesToTable() {
+    for (employee of employees) {
+        addTableRow(employee.firstName, employee.lastName, employee.idNum, employee.title, employee.salary);
+    }
 }
 
 function addTableRow(firstName, lastName, idNum, title, salary) {
@@ -57,4 +65,9 @@ function addTableRow(firstName, lastName, idNum, title, salary) {
     $row.append(`<td>${salary}</td>`);
 
     $('#salaryTable').append($row);
+}
+
+function updateExpense(salary) {
+    totalExpense += (parseInt(salary)/12);
+    return totalExpense;
 }
