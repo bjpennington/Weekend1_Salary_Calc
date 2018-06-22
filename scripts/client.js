@@ -32,6 +32,7 @@ function readyNow() {
 
 function addEventListener() {
     $('#submitBtn').on('click', handleSubmit);
+    $('#salaryTable').on('click', '.deleteBtn', handleDelete);
 }
 
 function handleSubmit() {
@@ -63,6 +64,10 @@ function handleSubmit() {
 
 }
 
+function handleDelete() {
+    $(this).closest('tr').remove();
+}
+
 function employeesToTable() {
 
     // clear current table data
@@ -83,6 +88,7 @@ function addTableRow(firstName, lastName, idNum, title, salary) {
     $row.append(`<td>${idNum}</td>`);
     $row.append(`<td>${title}</td>`);
     $row.append(`<td>${salary}</td>`);
+    $row.append('<button class="button deleteBtn">Delete</button>')
 
     $('#salaryTable').append($row);
 }
