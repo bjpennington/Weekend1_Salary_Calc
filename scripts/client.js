@@ -65,7 +65,13 @@ function handleSubmit() {
 }
 
 function handleDelete() {
+    let lessSalary = -($(this).closest('tr').data('salary'));
+    
     $(this).closest('tr').remove();
+
+    updateExpense(lessSalary);
+    
+    
 }
 
 function employeesToTable() {
@@ -88,19 +94,24 @@ function addTableRow(firstName, lastName, idNum, title, salary) {
     $row.append(`<td>${idNum}</td>`);
     $row.append(`<td>${title}</td>`);
     $row.append(`<td>${salary}</td>`);
-    $row.append('<button class="button deleteBtn">Delete</button>')
+    $row.append('<button class="button deleteBtn">Delete</button>');
+
+    $row.data('salary', salary);
+    
 
     $('#salaryTable').append($row);
+    
 }
 
 function updateExpense(salary) {
 
     // calculate monthly expense for passed in salary and add to total expense
     totalExpense += salary / 12;
+
     //return totalExpense;
 
     // append updated expenses to the DOM
-    $('#monthlyTotal').text('Total Monthly: ' + totalExpense);
+    $('#monthlyTotal').text('Total Monthly: ' + totalExpense.toFixed(2));
 }
 
 function checkCosts() {
