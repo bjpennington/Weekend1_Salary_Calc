@@ -8,7 +8,7 @@ class Employee {
         this.lastName = lastName;
         this.idNum = idNum;
         this.title = title;
-        this.salary = salary;
+        this.salary = parseInt(salary);
     }
 }
 
@@ -97,7 +97,7 @@ function addTableRow(firstName, lastName, idNum, title, salary) {
     $row.append(`<td>${lastName}</td>`);
     $row.append(`<td>${idNum}</td>`);
     $row.append(`<td>${title}</td>`);
-    $row.append(`<td>${salary}</td>`);
+    $row.append(`<td>${accounting.formatMoney(salary)}</td>`);
     $row.append('<button class="button deleteBtn">Delete</button>');
 
     $row.data('salary', salary);
@@ -116,7 +116,7 @@ function updateExpense(salary) {
     //return totalExpense;
 
     // append updated expenses to the DOM
-    $('#monthlyTotal').text('Total Monthly: ' + totalExpense.toFixed(2));
+    $('#monthlyTotal').text('Total Monthly: ' + accounting.formatMoney(totalExpense));
 }
 
 function checkCosts() {
