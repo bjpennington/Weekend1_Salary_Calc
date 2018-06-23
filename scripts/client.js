@@ -66,15 +66,21 @@ function handleSubmit() {
 
 
 function handleDelete() {
-    
+
     let deleteName = $(this).closest('tr').data('name');
     if (confirm('Are you sure you want to delete ' + deleteName + '?')) {
-    let lessSalary = -($(this).closest('tr').data('salary'));
+        let lessSalary = -($(this).closest('tr').data('salary'));
+        for (let i = 0; i < employees.length; i++) {
+            if (-(employees[i].salary) === lessSalary) {
+                employees.splice(i, 1);
+            }
+        }
 
-    $(this).closest('tr').remove();
 
-    updateExpense(lessSalary);
-}
+        $(this).closest('tr').remove();
+
+        updateExpense(lessSalary);
+    }
 
 }
 
