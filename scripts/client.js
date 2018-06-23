@@ -9,8 +9,8 @@ class Employee {
         this.idNum = idNum;
         this.title = title;
         this.salary = parseInt(salary);
-    }
-}
+    } // end constructor
+} // end Employee class
 
 // set global variable for total expenses
 let totalExpense = 0;
@@ -19,31 +19,31 @@ let totalExpense = 0;
 function newEmployee(firstName, lastName, idNum, title, salary) {
     let employee = new Employee(firstName, lastName, idNum, title, salary);
     employees.push(employee);
-    return employee;
-}
+//    return employee;
+} // end newEmployee
 
-
+//initialize jQuery
 $(readyNow);
 
 function readyNow() {
-    addEventListener();
+    addEventListeners();
     updateExpense(totalExpense);
-}
+} // end readyNow
 
-function addEventListener() {
+function addEventListeners() {
     $('#submitBtn').on('click', handleSubmit);
     $('#salaryTable').on('click', '.deleteBtn', handleDelete);
-}
+} // end addEventListeners
 
 function handleSubmit() {
-    // capture input values
+    // capture input values from DOM
     let firstName = $('#fnInput').val();
     let lastName = $('#lnInput').val();
     let idNum = $('#idNumInput').val();
     let title = $('#titleInput').val();
     let salary = $('#salaryInput').val();
 
-    // use input values to create new objects in the array
+    // use input values to create new objects in the employees array
     newEmployee(firstName, lastName, idNum, title, salary);
 
     // append new table row with input data
@@ -52,53 +52,55 @@ function handleSubmit() {
     // update total expense based on additonal salary
     updateExpense(salary);
 
+    // check if total monthly expenses are greater than $20,000
     checkCosts();
 
+    // clear inputs
     $('#fnInput').val('');
     $('#lnInput').val('');
     $('#idNumInput').val('');
     $('#titleInput').val('');
     $('#salaryInput').val('');
 
-
-
-}
-
+} // end handleSubmit
 
 function handleDelete() {
 
+    // capture employee name from row to be deleted
     let deleteName = $(this).closest('tr').data('name');
+
+    // confirm delete alert specifying employee name
     if (confirm('Are you sure you want to delete ' + deleteName + '?')) {
+
+        // capture employee salary from row to be deleted
         let lessSalary = -($(this).closest('tr').data('salary'));
+
+        // use employee salary to identify and remove employee from employees array
         for (let i = 0; i < employees.length; i++) {
             if (-(employees[i].salary) === lessSalary) {
                 employees.splice(i, 1);
-            }
-        }
-
-
+            } // end if statement
+        } // end for loop
+        
+        // remove row from table
         $(this).closest('tr').remove();
 
+        // update total expense based on employee removal
         updateExpense(lessSalary);
-    }
 
-}
+        // check if total monthly expenses are greater than $20,000
+        checkCosts();
 
-function employeesToTable() {
+    } // end if statement
+} // end handleDelete
 
-    // clear current table data
-    $('#salaryTable').empty();
-
-    // add table data built from employees array
-    for (employee of employees) {
-        addTableRow(employee.firstName, employee.lastName, employee.idNum, employee.title, employee.salary);
-    }
-}
-
+// create new table row and append to the DOM
 function addTableRow(firstName, lastName, idNum, title, salary) {
-    // use passed in parameters to create a table row
+
+    // initialize new empty row
     let $row = $('<tr></tr>');
 
+    // append data to new row
     $row.append(`<td>${firstName}</td>`);
     $row.append(`<td>${lastName}</td>`);
     $row.append(`<td>${idNum}</td>`);
@@ -106,27 +108,50 @@ function addTableRow(firstName, lastName, idNum, title, salary) {
     $row.append(`<td>${accounting.formatMoney(salary)}</td>`);
     $row.append('<button class="button deleteBtn">Delete</button>');
 
+    // add data tags to row
     $row.data('salary', salary);
     $row.data('name', firstName + ' ' + lastName);
 
-
+    // append new row to table on the DOM
     $('#salaryTable').append($row);
 
-}
+} // end addTableRow
 
+// clear old table data and recreate data using employees array
+function employeesToTable() {
+
+    // clear current table data
+    $('#salaryTable').empty();
+
+    // add table data built from employees array
+    for (employee of employees) {
+        addTableRow(employee.firstName,
+                    employee.lastName,
+                    employee.idNum,
+                    employee.title,
+                    employee.salary);
+    } // end for loop
+} // end employeesToTable
+
+// update total monthly costs
 function updateExpense(salary) {
 
     // calculate monthly expense for passed in salary and add to total expense
     totalExpense += salary / 12;
 
-    //return totalExpense;
-
     // append updated expenses to the DOM
     $('#monthlyTotal').text('Total Monthly: ' + accounting.formatMoney(totalExpense));
-}
+} // end updateExpense
 
+// check if total monthly cost exceeds $20,000
 function checkCosts() {
+
+    // add red background if total monthly cost exceeds $20,000
     if (totalExpense > 20000) {
         $('#monthlyTotal').addClass('redBack');
+    } // end if statement
+    //remove red background if total monthly cost drops below $20,000
+    else {
+        $('#monthlyTotal').removeClass('redBack');
     }
-}
+} // end checkCosts
