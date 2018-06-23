@@ -64,14 +64,18 @@ function handleSubmit() {
 
 }
 
+
 function handleDelete() {
-    let lessSalary = -($(this).closest('tr').data('salary'));
     
+    let deleteName = $(this).closest('tr').data('name');
+    if (confirm('Are you sure you want to delete ' + deleteName + '?')) {
+    let lessSalary = -($(this).closest('tr').data('salary'));
+
     $(this).closest('tr').remove();
 
     updateExpense(lessSalary);
-    
-    
+}
+
 }
 
 function employeesToTable() {
@@ -97,10 +101,11 @@ function addTableRow(firstName, lastName, idNum, title, salary) {
     $row.append('<button class="button deleteBtn">Delete</button>');
 
     $row.data('salary', salary);
-    
+    $row.data('name', firstName + ' ' + lastName);
+
 
     $('#salaryTable').append($row);
-    
+
 }
 
 function updateExpense(salary) {
@@ -115,7 +120,7 @@ function updateExpense(salary) {
 }
 
 function checkCosts() {
-    if(totalExpense > 20000) {
+    if (totalExpense > 20000) {
         $('#monthlyTotal').addClass('redBack');
     }
 }
