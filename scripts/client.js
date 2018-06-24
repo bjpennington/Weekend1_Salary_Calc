@@ -67,17 +67,18 @@ function handleSubmit() {
 function handleDelete() {
 
     // capture employee name from row to be deleted
-    let deleteName = $(this).closest('tr').data('name');
+    let nameToDelete = $(this).closest('tr').data('name');
 
     // confirm delete alert specifying employee name
-    if (confirm('Are you sure you want to delete ' + deleteName + '?')) {
+    if (confirm('Are you sure you want to delete ' + nameToDelete + '?')) {
 
-        // capture employee salary from row to be deleted
+        // capture employee id and salary from row to be deleted
+        let idToDelete = $(this).closest('tr').data('id');
         let lessSalary = -($(this).closest('tr').data('salary'));
 
-        // use employee salary to identify and remove employee from employees array
+        // use employee id to identify and remove employee from employees array
         for (let i = 0; i < employees.length; i++) {
-            if (-(employees[i].salary) === lessSalary) {
+            if (employees[i].idNum === idToDelete) {
                 employees.splice(i, 1);
             } // end if statement
         } // end for loop
@@ -109,6 +110,7 @@ function addTableRow(firstName, lastName, idNum, title, salary) {
     $row.append('<button class="button deleteBtn">Delete</button>');
 
     // add data tags to row
+    $row.data('id', idNum);
     $row.data('salary', salary);
     $row.data('name', firstName + ' ' + lastName);
 
