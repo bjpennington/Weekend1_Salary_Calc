@@ -99,8 +99,8 @@ function handleDelete() {
             } // end if statement
         } // end for loop
 
-        // remove row from table
-        $(this).closest('tr').remove();
+        // recreate table based on updated array
+        employeesToTable();
 
         // update total expense based on employee removal
         updateExpense(lessSalary);
@@ -110,6 +110,22 @@ function handleDelete() {
 
     } // end if statement
 } // end handleDelete
+
+// clear old table data and recreate data using employees array
+function employeesToTable() {
+
+    // clear current table data
+    $('#salaryTable').empty();
+
+    // add table data built from employees array
+    for (employee of employees) {
+        addTableRow(employee.firstName,
+            employee.lastName,
+            employee.idNum,
+            employee.title,
+            employee.salary);
+    } // end for loop
+} // end employeesToTable
 
 // create new table row and append to the DOM
 function addTableRow(firstName, lastName, idNum, title, salary) {
@@ -134,22 +150,6 @@ function addTableRow(firstName, lastName, idNum, title, salary) {
     $('#salaryTable').append($row);
 
 } // end addTableRow
-
-// clear old table data and recreate data using employees array
-function employeesToTable() {
-
-    // clear current table data
-    $('#salaryTable').empty();
-
-    // add table data built from employees array
-    for (employee of employees) {
-        addTableRow(employee.firstName,
-            employee.lastName,
-            employee.idNum,
-            employee.title,
-            employee.salary);
-    } // end for loop
-} // end employeesToTable
 
 // update total monthly costs
 function updateExpense(salary) {
