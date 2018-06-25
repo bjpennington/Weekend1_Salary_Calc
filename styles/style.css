@@ -4,7 +4,8 @@ body {
 }
 
 header {
-    margin: auto;
+    /* margin: auto; */
+    width: 100%;
     padding: 40px;
     background-color: grey;
     text-align: center;
@@ -19,10 +20,6 @@ h1 {
     padding: 20px;
 }
 
-#submitBtn {
-    margin: 0 auto;
-}
-
 .col {
     padding: 20px;
 }
@@ -33,21 +30,15 @@ table {
 }
 
 #salaryHead {
-    text-align: right;
+    text-align: center;
 }
 
 .salaryColumn {
     text-align: right;
 }
 
-.btn-danger {
-    margin-top: 5px;
-    margin-left: 8px;
-}
-
 #monthlyTotal {
     padding: 5px;
-    text-align: right;
     display: inline-block;
     float: right;
 }

@@ -107,7 +107,7 @@ function addTableRow(firstName, lastName, idNum, title, salary) {
     $row.append(`<td>${idNum}</td>`);
     $row.append(`<td>${title}</td>`);
     $row.append(`<td class="salaryColumn">${accounting.formatMoney(salary)}</td>`);
-    $row.append('<button class="btn btn-danger deleteBtn">Delete</button>');
+    $row.append('<td><button class="btn btn-danger deleteBtn">Delete</button></td>');
 
     // add data tags to row
     $row.data('id', idNum);
