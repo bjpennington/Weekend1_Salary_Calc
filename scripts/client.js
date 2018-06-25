@@ -19,7 +19,7 @@ let totalExpense = 0;
 function newEmployee(firstName, lastName, idNum, title, salary) {
     let employee = new Employee(firstName, lastName, idNum, title, salary);
     employees.push(employee);
-//    return employee;
+    //    return employee;
 } // end newEmployee
 
 //initialize jQuery
@@ -28,6 +28,7 @@ $(readyNow);
 function readyNow() {
     addEventListeners();
     updateExpense(totalExpense);
+    $('#warningText').hide();
 } // end readyNow
 
 function addEventListeners() {
@@ -43,24 +44,37 @@ function handleSubmit() {
     let title = $('#titleInput').val();
     let salary = $('#salaryInput').val();
 
-    // use input values to create new objects in the employees array
-    newEmployee(firstName, lastName, idNum, title, salary);
+    if (firstName === '' ||
+        lastName === '' ||
+        idNum === '' ||
+        title === '' ||
+        salary === '') {
+        $('#warningText').show();
+    } // end if codeblock
+    else {
 
-    // append new table row with input data
-    employeesToTable();
+        $('#warningText').hide();
 
-    // update total expense based on additonal salary
-    updateExpense(salary);
+        // use input values to create new objects in the employees array
+        newEmployee(firstName, lastName, idNum, title, salary);
 
-    // check if total monthly expenses are greater than $20,000
-    checkCosts();
+        // append new table row with input data
+        employeesToTable();
 
-    // clear inputs
-    $('#fnInput').val('');
-    $('#lnInput').val('');
-    $('#idNumInput').val('');
-    $('#titleInput').val('');
-    $('#salaryInput').val('');
+        // update total expense based on additonal salary
+        updateExpense(salary);
+
+        // check if total monthly expenses are greater than $20,000
+        checkCosts();
+
+        // clear inputs
+        $('#fnInput').val('');
+        $('#lnInput').val('');
+        $('#idNumInput').val('');
+        $('#titleInput').val('');
+        $('#salaryInput').val('');
+
+    } // end else codeblock
 
 } // end handleSubmit
 
@@ -82,7 +96,7 @@ function handleDelete() {
                 employees.splice(i, 1);
             } // end if statement
         } // end for loop
-        
+
         // remove row from table
         $(this).closest('tr').remove();
 
@@ -128,10 +142,10 @@ function employeesToTable() {
     // add table data built from employees array
     for (employee of employees) {
         addTableRow(employee.firstName,
-                    employee.lastName,
-                    employee.idNum,
-                    employee.title,
-                    employee.salary);
+            employee.lastName,
+            employee.idNum,
+            employee.title,
+            employee.salary);
     } // end for loop
 } // end employeesToTable
 
