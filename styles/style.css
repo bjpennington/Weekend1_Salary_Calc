@@ -3,9 +3,15 @@ body {
     color: white;
 }
 
+.container-fluid {
+    padding: 0;
+}
+
+.row {
+    padding: 20px;
+}
+
 header {
-    /* margin: auto; */
-    width: 100%;
     padding: 40px;
     background-color: grey;
     text-align: center;
