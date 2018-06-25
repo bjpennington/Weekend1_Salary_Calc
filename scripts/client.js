@@ -44,6 +44,7 @@ function handleSubmit() {
     let title = $('#titleInput').val();
     let salary = $('#salaryInput').val();
 
+    // show warning text if any input fields are left blank before submission
     if (firstName === '' ||
         lastName === '' ||
         idNum === '' ||
@@ -53,6 +54,7 @@ function handleSubmit() {
     } // end if codeblock
     else {
 
+        // rehides warning text once inputs are submitted with all fields filled
         $('#warningText').hide();
 
         // use input values to create new objects in the employees array
